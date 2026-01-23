@@ -21,11 +21,14 @@ public class OrderApp {
         orders.add(order1);
         orders.add(order2);
         orders.add(order3);
-
+        
         // Cancel one order using a controlled public method.
         // This properly changes the order state while preserving encapsulation.
         order2.cancelOrder();
-
+        
+        // Register one order as paid.
+        order3.pay();
+        
         // Iterator is used to allow safe traversal and removal of elements.
         Iterator<Order> iterator = orders.iterator();
 
@@ -39,7 +42,7 @@ public class OrderApp {
             // iterator.remove() prevents ConcurrentModificationException.
             if (order.getStatus() == OrderStatus.CANCELLED) {
                 iterator.remove();
-                System.out.println("Cancelled order removed.");
+        
             }
         }
     }
