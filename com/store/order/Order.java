@@ -1,28 +1,34 @@
 package com.store.order;
 
+// Abstract class represents a general concept of an Order. This enforces abstraction.
 public abstract class Order {
 
+    // Fields are private to enforce encapsulation
     private int orderId;
     private double amount;
     private OrderStatus status;
 
+    // Constructor initializes required data.
+    // Status is automatically set to PENDING to enforce a valid starting state.
     public Order(int orderId, double amount) {
         this.orderId = orderId;
         this.amount = amount;
         this.status = OrderStatus.PENDING;
     }
 
-    // Abstract method (Abstraction)
+    // Abstract method forces subclasses to define how an order is processed.
     public abstract void processOrder();
 
-    // Concrete method
+    // Concrete method shared by all orders.
+    // Getters are used instead of direct field access to preserve encapsulation.
     public String getOrderSummary() {
         return "Order ID: " + orderId +
-               ", Amount: " + amount +
+               ", Amount: $" + amount +
                ", Status: " + status;
     }
 
-    // Getters (Encapsulation)
+    // Getters
+
     public int getOrderId() {
         return orderId;
     }
@@ -35,16 +41,18 @@ public abstract class Order {
         return status;
     }
 
-    // Setter with validation
+    // Setter with validation.
+    // This prevents invalid amounts from corrupting the object.
     public void setAmount(double amount) {
         if (amount >= 0) {
             this.amount = amount;
         } else {
-            System.out.println("Invalid amount. Cannot be negative.");
+            System.out.println("Amount cannot be negative.");
         }
     }
 
-    // Protected setter for subclasses
+    // Protected setter for status.
+    // Only subclasses can change order status. This maintains controlled access.
     protected void setStatus(OrderStatus status) {
         this.status = status;
     }
