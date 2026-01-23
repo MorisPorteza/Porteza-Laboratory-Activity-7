@@ -4,58 +4,42 @@ import com.store.order.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+// This is the main application class that's responsible only for running the program.
 public class OrderApp {
 
     public static void main(String[] args) {
 
+        // Abstract type Order is used to demonstrate abstraction and allow different order types in the same collection.
         ArrayList<Order> orders = new ArrayList<>();
 
-        // Add at least three orders
-        OnlineOrder o1 = new OnlineOrder(101, 1500.00);
-        OnlineOrder o2 = new OnlineOrder(102, 2500.00);
-        OnlineOrder o3 = new OnlineOrder(103, 500.00);
+        // Create OnlineOrder objects
+        OnlineOrder order1 = new OnlineOrder(101, 250.00);
+        OnlineOrder order2 = new OnlineOrder(102, 150.50);
+        OnlineOrder order3 = new OnlineOrder(103, 99.99);
 
-        orders.add(o1);
-        orders.add(o2);
-        orders.add(o3);
+        // Add orders to the collection
+        orders.add(order1);
+        orders.add(order2);
+        orders.add(order3);
 
-        // Simulate processing
-        o1.processOrder();
-        o1.pay();
+        // Cancel one order using a controlled public method.
+        // This properly changes the order state while preserving encapsulation.
+        order2.cancelOrder();
 
-        // Manually cancel one order for testing
-        o3.processOrder();
-        // Access via protected method inside same package not allowed here
-        // So we simulate cancellation via subclass behavior
-        // (Alternative approach shown below)
-        cancelOrder(o3);
-
-        // Iterator traversal
+        // Iterator is used to allow safe traversal and removal of elements.
         Iterator<Order> iterator = orders.iterator();
 
         while (iterator.hasNext()) {
             Order order = iterator.next();
+
+            // Display order summary
             System.out.println(order.getOrderSummary());
 
+            // Remove orders that are cancelled.
+            // iterator.remove() prevents ConcurrentModificationException.
             if (order.getStatus() == OrderStatus.CANCELLED) {
                 iterator.remove();
                 System.out.println("Cancelled order removed.");
-            }
-        }
-    }
-
-    // Helper method to cancel order safely
-    private static void cancelOrder(Order order) {
-        if (order instanceof OnlineOrder) {
-            ((OnlineOrder) order).processOrder();
-            // Using subclass-protected access
-            try {
-                java.lang.reflect.Method method =
-                        Order.class.getDeclaredMethod("setStatus", OrderStatus.class);
-                method.setAccessible(true);
-                method.invoke(order, OrderStatus.CANCELLED);
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
