@@ -22,6 +22,6 @@ public class OnlineOrder extends Order implements Payable {
     @Override
     public void pay() {
         setStatus(OrderStatus.PAID);
-        System.out.println("Order ID " + getOrderId() + " has been paid.");
+        System.out.println("Order ID " + getOrderId() + " has been successfully paid.");
     }
 }
