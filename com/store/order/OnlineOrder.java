@@ -24,4 +24,9 @@ public class OnlineOrder extends Order implements Payable {
         setStatus(OrderStatus.PAID);
         System.out.println("Order ID " + getOrderId() + " has been successfully paid.");
     }
+    
+    // Used to cancel order.
+    public void cancelOrder() {
+        setStatus(OrderStatus.CANCELLED);
+    }
 }
