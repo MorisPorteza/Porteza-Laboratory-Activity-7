@@ -13,9 +13,9 @@ public class OrderApp {
         ArrayList<Order> orders = new ArrayList<>();
 
         // Create OnlineOrder objects
-        OnlineOrder order1 = new OnlineOrder(101, 250.00);
-        OnlineOrder order2 = new OnlineOrder(102, 150.50);
-        OnlineOrder order3 = new OnlineOrder(103, 99.99);
+        OnlineOrder order1 = new OnlineOrder(101, 342.40);
+        OnlineOrder order2 = new OnlineOrder(102, 111.50);
+        OnlineOrder order3 = new OnlineOrder(103, 637.89);
 
         // Add orders to the collection
         orders.add(order1);
