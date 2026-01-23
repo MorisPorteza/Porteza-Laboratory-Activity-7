@@ -23,7 +23,7 @@ public abstract class Order {
     // Getters are used instead of direct field access to preserve encapsulation.
     public String getOrderSummary() {
         return "Order ID: " + orderId +
-               ", Amount: $" + amount +
+               ", Amount: ₱" + amount +
                ", Status: " + status;
     }
 
