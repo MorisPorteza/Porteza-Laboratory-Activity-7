@@ -22,6 +22,16 @@ public class OrderApp {
         orders.add(order2);
         orders.add(order3);
         
+        System.out.println("𝐏𝐨𝐫𝐭𝐞𝐳𝐚'𝐬 𝐎𝐫𝐝𝐞𝐫 𝐌𝐚𝐧𝐚𝐠𝐞𝐦𝐞𝐧𝐭 𝐒𝐲𝐬𝐭𝐞𝐦");
+        
+        System.out.println();
+        
+        // Added for demonstration only.
+        // Shows that the method processOrder works.
+        order1.processOrder();
+        order2.processOrder();
+        order3.processOrder();
+        
         // Cancel one order using a controlled public method.
         // This properly changes the order state while preserving encapsulation.
         order2.cancelOrder();
